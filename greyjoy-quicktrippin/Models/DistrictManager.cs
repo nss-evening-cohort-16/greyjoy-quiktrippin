@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace greyjoy_quicktrippin.Models
 {
-    internal class Employee
+    internal class DistrictManager : Employee
     {
-        public string name { get; set; }
-        public int employeeNum  { get; set; }   
+
     }
 }
