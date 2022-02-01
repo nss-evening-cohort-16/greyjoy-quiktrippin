@@ -8,7 +8,14 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class Employee
     {
-        public string name { get; set; }
-        public int employeeNum  { get; set; }   
+        public string Name { get; set; }
+        public int EmployeeNum  { get; set; }   
+
+        public  Employee(string name, int empNum )
+        {
+            Name = name;
+            EmployeeNum = empNum;
+
+        }
     }
 }
