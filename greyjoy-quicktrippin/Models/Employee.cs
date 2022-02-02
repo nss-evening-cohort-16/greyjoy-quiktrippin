@@ -10,6 +10,5 @@ namespace greyjoy_quicktrippin.Models
     {
         public string Name { get; set; }
         public int EmployeeNum  { get; set; }   
-        public List<Employee> Employees { get; set;}
     }
 }
