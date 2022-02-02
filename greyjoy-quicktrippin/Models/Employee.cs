@@ -11,5 +11,11 @@ namespace greyjoy_quicktrippin.Models
         public string Name { get; set; }
         public int EmployeeNum  { get; set; }   
 
+        public  Employee(string name, int empNum )
+        {
+            Name = name;
+            EmployeeNum = empNum;
+
+        }
     }
 }
