@@ -44,7 +44,32 @@ namespace greyjoy_quicktrippin.Models
 
         public void runAddDistrictSales()
         {
-            Console.WriteLine("placeholder func");
+            bool correctInput = false;
+            var districtInput = Console.ReadLine();
+            var parsedDistrict = 0;
+
+
+            while (!correctInput)
+            {
+                Console.WriteLine("Enter District Number");
+                var input = Console.ReadLine();
+                bool intCheck = int.TryParse(districtInput, out parsedDistrict);
+                if (intCheck)
+                {
+                    Company.Districts.Where(d => d == parsedDistrict)
+                }
+            }
+
+            correctInput = false;
+
+            while (!correctInput)
+            {
+                Console.WriteLine("Enter Store Number");
+                var input = Console.ReadLine();
+                correctInput = int.TryParse(districtInput, out parsedDistrict);
+            }
+
+
         }
         public void runGenerateReport()
         {
