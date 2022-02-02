@@ -11,13 +11,16 @@ namespace greyjoy_quicktrippin.Models
         public List<Store> StoresList = new List<Store>();
         public int DistrictNumber { get; set; }
         public double DistrictTotalRetail { get; set; }
-        public double DistrictTotalGas { get; set; }
+        public double DistrictTotalGas { get; set; }  
 
-        public void AddStore(Store store);
-            Store.Add(store);
+        public void DistrictGasTotal(int gasSales)
+        {
+            Console.WriteLine("Look. A Unicorn.");
+        }
 
-        public void DistrictGasTotal();
-
-        public void DistrictRetailTotal();
+        public void DistrictRetailTotal(int retailSales)
+        {
+            Console.WriteLine("Look. A Unicorn.");
+        }
     }
 }
