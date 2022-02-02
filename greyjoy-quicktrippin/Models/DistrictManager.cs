@@ -8,6 +8,11 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class DistrictManager : Employee
     {
+        public DistrictManager(string name, int empNum)
+        {
+            Name = name;
+            EmployeeNum = empNum;
 
+        }
     }
 }
