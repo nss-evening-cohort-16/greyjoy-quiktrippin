@@ -8,6 +8,6 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class Company
     {
-        public HashSet<int> Districts { get; set; }
+        public HashSet<District> Districts { get; set; }
     }
 }
