@@ -16,6 +16,8 @@ namespace greyjoy_quicktrippin.Models
 4. Add a Store/District
 5. Exit";
 
+        Company QuikTrip = new Company();
+
         public void runMenu()
         {
             bool correctInput = false;
@@ -56,7 +58,13 @@ namespace greyjoy_quicktrippin.Models
                 bool intCheck = int.TryParse(districtInput, out parsedDistrict);
                 if (intCheck)
                 {
-                    Company.Districts.Where(d => d == parsedDistrict)
+                    var district = QuikTrip.Districts.Where(d => d == parsedDistrict);
+                    if(district.Count() == 1)
+                    {
+                        var disList = district.ToList();
+                        parsedDistrict = disList[0];
+                        correctInput = true;
+                    }
                 }
             }
 
@@ -66,8 +74,17 @@ namespace greyjoy_quicktrippin.Models
             {
                 Console.WriteLine("Enter Store Number");
                 var input = Console.ReadLine();
-                correctInput = int.TryParse(districtInput, out parsedDistrict);
-            }
+                bool intCheck = int.TryParse(districtInput, out parsedDistrict);
+                if (intCheck)
+                {
+                    var district = QuikTrip.Districts.Where(d => d == parsedDistrict);
+                    if (district.Count() == 1)
+                    {
+                        var disList = district.ToList();
+                        parsedDistrict = disList[0];
+                        correctInput = true;
+                    }
+                }
 
 
         }
