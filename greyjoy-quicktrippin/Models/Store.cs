@@ -8,7 +8,7 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class Store
     {
-        List<string> Employee = new List<string>();
+        public List<Employee> Employees = new List<Employee>();
 
         public int StoreNum { get; set; }
         public double TotalRetail { get; set; }

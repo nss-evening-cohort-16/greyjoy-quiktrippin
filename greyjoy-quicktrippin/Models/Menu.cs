@@ -44,31 +44,92 @@ namespace greyjoy_quicktrippin.Models
             }
         }
 
+        public int doesDisctrictExist(List<District> list, string itemNumber)
+        {
+            bool correctInput = false;
+
+                var input = Console.ReadLine();
+                int parsedOutput;
+                bool intCheck = int.TryParse(input, out parsedOutput);
+                if (intCheck)
+                {
+                    var itemSearch = list.Where(d => d.DistrictNumber == parsedOutput);
+                    if (itemSearch.Count() == 1)
+                    {
+                        var itemList = itemSearch.ToList();
+                        correctInput = true;
+                        return itemList[0].DistrictNumber;
+                    }
+                else return -1;
+
+            }
+                else return -1;
+        }
+
+        public int doesStoreExist(List<Store> list, string itemNumber)
+        {
+            bool correctInput = false;
+
+                var input = Console.ReadLine();
+                int parsedOutput;
+                bool intCheck = int.TryParse(input, out parsedOutput);
+                if (intCheck)
+                {
+                    var itemSearch = list.Where(s => s.StoreNum == parsedOutput);
+                    if (itemSearch.Count() == 1)
+                    {
+                        var itemList = itemSearch.ToList();
+                        correctInput = true;
+                        return itemList[0].StoreNum;
+                    }
+                else return -1;
+
+            }
+                else return -1;
+        }
+
+        public int doesEmployeeExist(List<Employee> list, string itemNumber)
+        {
+            bool correctInput = false;
+
+                var input = Console.ReadLine();
+                int parsedOutput;
+                bool intCheck = int.TryParse(input, out parsedOutput);
+                if (intCheck)
+                {
+                    var itemSearch = list.Where(e => e.EmployeeNum == parsedOutput);
+                    if (itemSearch.Count() == 1)
+                    {
+                        var itemList = itemSearch.ToList();
+                        correctInput = true;
+                        return itemList[0].EmployeeNum;
+                    }
+                else return -1;
+
+            }
+                else return -1;
+        }
+
         public void runAddDistrictSales()
         {
             bool correctInput = false;
-            var districtInput = Console.ReadLine();
-            var parsedDistrict = 0;
-            var parsedStore = 0;
-            District selectedDistrict = new District();
-            Store selectedStore = new Store(0,0,0);
-
+            int selectedDistrict = -1;
+            int selectedStore = -1;
+            int selectedEmployee = -1;
+            var storeDistrict = QuikTrip.Districts.Where(d => d.DistrictNumber == selectedDistrict).ToList()[0];
+            var employeeStore = storeDistrict.StoresList.Where(s => s.StoreNum == selectedStore).ToList()[0];
 
             while (!correctInput)
             {
                 Console.WriteLine("Enter District Number");
-                var input = Console.ReadLine();
-                bool intCheck = int.TryParse(districtInput, out parsedDistrict);
-                if (intCheck)
+                var districtInput = Console.ReadLine();
+                int districtNum = doesDisctrictExist(QuikTrip.Districts, districtInput);
+                if(districtNum != -1)
                 {
-                    var district = QuikTrip.Districts.Where(d => d.DistrictNumber == parsedDistrict);
-                    if (district.Count() == 1)
-                    {
-                        var disList = district.ToList();
-                        selectedDistrict.DistrictNumber = disList[0].DistrictNumber;
-                        correctInput = true;
-                    }
+                    correctInput = true;
+                    selectedDistrict = districtNum;
                 }
+                else Console.WriteLine("Invalid District Number");
             }
 
             correctInput = false;
@@ -77,19 +138,29 @@ namespace greyjoy_quicktrippin.Models
             {
                 Console.WriteLine("Enter Store Number");
                 var storeInput = Console.ReadLine();
-                bool intCheck = int.TryParse(storeInput, out parsedStore);
-                if (intCheck)
+                int storeNum = doesStoreExist(storeDistrict.StoresList, storeInput);
+                if (storeNum != -1)
                 {
-                    var storeList = selectedDistrict.StoresList.Where(s => s.StoreNum == parsedStore);
-                    if (storeList.Count() == 1)
-                    {
-                        var storeList1 = storeList.ToList();
-                        selectedStore = storeList1[0];
-                        correctInput = true;
-                    }
-                } 
+                    correctInput = true;
+                    selectedDistrict = storeNum;
+                }
+                else Console.WriteLine("Invalid Store Number");
+            }
 
+            correctInput = false;
 
+            while (!correctInput)
+            {
+                Console.WriteLine("Enter Employee Number");
+                var employeeInput = Console.ReadLine();
+                int EmployeeNum = doesEmployeeExist(employeeStore.Employees, employeeInput);
+                if (EmployeeNum != -1)
+                {
+                    correctInput = true;
+                    selectedEmployee = EmployeeNum;
+                    Console.WriteLine(EmployeeNum);
+                }
+                else Console.WriteLine("Invalid Employee Number");
             }
         }
 
@@ -131,6 +202,9 @@ namespace greyjoy_quicktrippin.Models
                         var newDistrict = new District();
                         newDistrict.DistrictNumber = parsedNum;
                         QuikTrip.Districts.Add(newDistrict);
+                         correctInput = true;
+                        foreach (District district in QuikTrip.Districts)
+                        { Console.WriteLine(district.DistrictNumber); }
                     }
                 }
                 else
@@ -140,6 +214,10 @@ namespace greyjoy_quicktrippin.Models
                 }
                 
             }
+            Console.ReadLine();
+            Console.Clear();
+            runMenu();
+            
 
         }
     }
