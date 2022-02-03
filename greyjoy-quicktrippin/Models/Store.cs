@@ -21,6 +21,10 @@ namespace greyjoy_quicktrippin.Models
             TotalRetail = totalRetail;
             TotalGas = totalGas;
         }
+        public Store()
+        {
+            
+        }
 
     }
 }

@@ -8,6 +8,6 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class Company
     {
-        public List<District> Districts = new List<District>();  
+        public List<District> Districts = new List<District>();
     }
 }
