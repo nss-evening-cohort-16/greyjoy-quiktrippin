@@ -258,7 +258,44 @@ namespace greyjoy_quicktrippin.Models
 
         public void runGenerateReport()
         {
-            Console.WriteLine("placeholder func");
+            District selectedDistrict = new District();
+            bool correctInput = false;
+
+            while (!correctInput)
+            {
+                Console.WriteLine("Enter District Number");
+                var districtInput = Console.ReadLine();
+                int districtNum = doesDisctrictExist(QuikTrip.Districts, districtInput);
+                if (districtNum != -1)
+                {
+                    selectedDistrict = QuikTrip.Districts.Where(d => d.DistrictNumber == districtNum).ToList()[0];
+                    correctInput = true;
+                }
+                else Console.WriteLine("Invalid District Number");
+            }
+            var CurrentDis = selectedDistrict.StoresList;
+
+            foreach (Store store in selectedDistrict.StoresList)
+            {
+                int i = 1;
+                Console.WriteLine($@"Store #{store.StoreNum}
+------------------------------
+");
+                foreach (Employee employee in store.Employees)
+                {
+                    i++;
+                    Console.WriteLine($@"{i}.{employee.Position}
+    {employee.Name}:
+         Retail Sales: ${employee.RetailSales}
+         Gas Sales: ${employee.GasSales}
+");
+                }
+
+                Console.WriteLine($@"Total Gas: {store.TotalGas}
+Total Retail: {store.TotalRetail}
+
+");
+            }
         }
         public void runAddEmployee()
         {
