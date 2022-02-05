@@ -8,6 +8,7 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class StoreManager : Employee
     {
+        public override string Position { get => "Store Manager"; set { } }
         public StoreManager (string name, int empNum, double retail, double gas)
         {
             Name = name;

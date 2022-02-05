@@ -8,6 +8,7 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class DistrictManager : Employee
     {
+        public override string Position { get => "District Manager"; set { } }
         public DistrictManager(string name, int empNum)
         {
             Name = name;
