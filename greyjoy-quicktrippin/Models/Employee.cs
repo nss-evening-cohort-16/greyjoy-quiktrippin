@@ -9,6 +9,9 @@ namespace greyjoy_quicktrippin.Models
     internal class Employee
     {
         public string Name { get; set; }
-        public int EmployeeNum  { get; set; }   
+        public int EmployeeNum  { get; set; }
+
+        public double RetailSales { get; set; }
+        public double GasSales { get; set; }
     }
 }

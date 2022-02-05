@@ -110,9 +110,8 @@ namespace greyjoy_quicktrippin.Models
 
         public int doesDisctrictExist(List<District> list, string itemNumber)
         {
-                var input = Console.ReadLine();
                 int parsedOutput;
-                bool intCheck = int.TryParse(input, out parsedOutput);
+                bool intCheck = int.TryParse(itemNumber, out parsedOutput);
                 if (intCheck)
                 {
                     var itemSearch = list.Where(d => d.DistrictNumber == parsedOutput);
@@ -129,9 +128,8 @@ namespace greyjoy_quicktrippin.Models
 
         public int doesStoreExist(List<Store> list, string itemNumber)
         {
-                var input = Console.ReadLine();
                 int parsedOutput;
-                bool intCheck = int.TryParse(input, out parsedOutput);
+                bool intCheck = int.TryParse(itemNumber, out parsedOutput);
                 if (intCheck)
                 {
                     var itemSearch = list.Where(s => s.StoreNum == parsedOutput);
@@ -148,9 +146,8 @@ namespace greyjoy_quicktrippin.Models
 
         public int doesEmployeeExist(List<Employee> list, string itemNumber)
         {
-                var input = Console.ReadLine();
                 int parsedOutput;
-                bool intCheck = int.TryParse(input, out parsedOutput);
+                bool intCheck = int.TryParse(itemNumber, out parsedOutput);
                 if (intCheck)
                 {
                     var itemSearch = list.Where(e => e.EmployeeNum == parsedOutput);
@@ -168,11 +165,9 @@ namespace greyjoy_quicktrippin.Models
         public void runAddDistrictSales()
         {
             bool correctInput = false;
-            int selectedDistrict = -1;
-            int selectedStore = -1;
-            int selectedEmployee = -1;
-            var storeDistrict = QuikTrip.Districts.Where(d => d.DistrictNumber == selectedDistrict).ToList()[0];
-            var employeeStore = storeDistrict.StoresList.Where(s => s.StoreNum == selectedStore).ToList()[0];
+            District storeDistrict = new District();
+            Store employeeStore = new Store();
+            Employee employee = new Employee();
 
             while (!correctInput)
             {
@@ -181,8 +176,8 @@ namespace greyjoy_quicktrippin.Models
                 int districtNum = doesDisctrictExist(QuikTrip.Districts, districtInput);
                 if(districtNum != -1)
                 {
+                    storeDistrict = QuikTrip.Districts.Where(d => d.DistrictNumber == districtNum).ToList()[0];
                     correctInput = true;
-                    selectedDistrict = districtNum;
                 }
                 else Console.WriteLine("Invalid District Number");
             }
@@ -197,7 +192,7 @@ namespace greyjoy_quicktrippin.Models
                 if (storeNum != -1)
                 {
                     correctInput = true;
-                    selectedDistrict = storeNum;
+                    employeeStore = storeDistrict.StoresList.Where(s => s.StoreNum == storeNum).ToList()[0];
                 }
                 else Console.WriteLine("Invalid Store Number");
             }
@@ -208,14 +203,56 @@ namespace greyjoy_quicktrippin.Models
             {
                 Console.WriteLine("Enter Employee Number");
                 var employeeInput = Console.ReadLine();
-                int EmployeeNum = doesEmployeeExist(employeeStore.Employees, employeeInput);
-                if (EmployeeNum != -1)
+                int employeeNum = doesEmployeeExist(employeeStore.Employees, employeeInput);
+                if (employeeNum != -1)
                 {
                     correctInput = true;
-                    selectedEmployee = EmployeeNum;
-                    Console.WriteLine(EmployeeNum);
+                    employee = employeeStore.Employees.Where(s => s.EmployeeNum == employeeNum).ToList()[0]; ;
                 }
                 else Console.WriteLine("Invalid Employee Number");
+            }
+
+            correctInput = false;
+
+            Console.WriteLine("(g)as or (r)etail sales?");
+            var input = Console.ReadLine();
+
+            if  (input == "g")
+            {
+                Console.WriteLine($"{employee.Name}'s Current Gas Sales = {employee.GasSales}");
+                while (!correctInput)
+                {
+                    Console.WriteLine("Enter gas sales:");
+                    var gas = Console.ReadLine();
+                    int parsedOutput;
+                    bool intCheck = int.TryParse(gas, out parsedOutput);
+                    if (intCheck)
+                    {
+                        employee.GasSales += parsedOutput;
+                        correctInput = true;
+                        Console.WriteLine($"{employee.Name}'s Updated Gas Sales = {employee.GasSales}");
+                    }
+                }
+                
+            }
+
+            if (input == "r")
+            {
+                Console.WriteLine($"{employee.Name}'s Current Retail Sales = {employee.RetailSales}");
+                while (!correctInput)
+                {
+                    Console.WriteLine("Enter retail sales:");
+                    var retail = Console.ReadLine();
+                    int parsedOutput;
+                    bool intCheck = int.TryParse(retail, out parsedOutput);
+                    if (intCheck)
+                    {
+                        employee.RetailSales += parsedOutput;
+                        correctInput = true;
+                        Console.WriteLine($"{employee.Name}'s Current Retail Sales = {employee.RetailSales}");
+                    }
+                }
+              
             }
         }
 
