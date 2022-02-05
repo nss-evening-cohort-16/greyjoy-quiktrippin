@@ -362,8 +362,8 @@ Total Retail: {store.TotalRetail}
                         if (intCheck)
                         {
                             var newStore = new Store();
-                            newStore.StoreNum = parsedNum;
-                            selectedDistrict.StoresList.Add(newDistrict);
+                            newStore.StoreNum = validStore;
+                            selectedDistrict.StoresList.Add(newStore);
                             correctInput = true;
                         }
                     }
