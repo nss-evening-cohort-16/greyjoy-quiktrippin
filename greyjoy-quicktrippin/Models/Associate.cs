@@ -8,8 +8,6 @@ namespace greyjoy_quicktrippin.Models
 {
     internal class Associate : Employee
     {
-        public double RetailSales { get; set; }
-        public double GasSales { get; set; }
         public Associate(string name, int empNum, double retail, double gas)
         {
             Name = name;
