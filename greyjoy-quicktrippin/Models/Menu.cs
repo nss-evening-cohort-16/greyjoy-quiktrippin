@@ -324,22 +324,49 @@ Total Retail: {store.TotalRetail}
                 {
                     Console.WriteLine("Enter New District Number:");
                     var newNumber = Console.ReadLine();
-                    int parsedNum = 0;
+                    int parsedNum;
                     bool intcheck = int.TryParse(newNumber, out parsedNum);
                     if (intcheck)
                     {
                         var newDistrict = new District();
                         newDistrict.DistrictNumber = parsedNum;
                         QuikTrip.Districts.Add(newDistrict);
-                         correctInput = true;
-                        foreach (District district in QuikTrip.Districts)
-                        { Console.WriteLine(district.DistrictNumber); }
+                        correctInput = true;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Enter New District Number:");
-                    var newNumber = Console.ReadLine();
+                    District selectedDistrict = new District();
+
+                    while (!correctInput)
+                    {
+                        Console.WriteLine("Enter District Number");
+                        var districtInput = Console.ReadLine();
+                        int districtNum = doesDisctrictExist(QuikTrip.Districts, districtInput);
+                        if (districtNum != -1)
+                        {
+                            selectedDistrict = QuikTrip.Districts.Where(d => d.DistrictNumber == districtNum).ToList()[0];
+                            correctInput = true;
+                        }
+                        else Console.WriteLine("Invalid District Number");
+                    }
+
+                    correctInput = false;
+
+                    while (correctInput == false)
+                    {
+                        Console.WriteLine("Enter new Store Number");
+                        var storeInput = Console.ReadLine();
+                        int validStore;
+                        bool intCheck = int.TryParse(storeInput, out validStore);
+                        if (intCheck)
+                        {
+                            var newStore = new Store();
+                            newStore.StoreNum = parsedNum;
+                            selectedDistrict.StoresList.Add(newDistrict);
+                            correctInput = true;
+                        }
+                    }
                 }
                 
             }
