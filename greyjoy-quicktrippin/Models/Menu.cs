@@ -110,8 +110,6 @@ namespace greyjoy_quicktrippin.Models
 
         public int doesDisctrictExist(List<District> list, string itemNumber)
         {
-            bool correctInput = false;
-
                 var input = Console.ReadLine();
                 int parsedOutput;
                 bool intCheck = int.TryParse(input, out parsedOutput);
@@ -121,7 +119,6 @@ namespace greyjoy_quicktrippin.Models
                     if (itemSearch.Count() == 1)
                     {
                         var itemList = itemSearch.ToList();
-                        correctInput = true;
                         return itemList[0].DistrictNumber;
                     }
                 else return -1;
@@ -132,8 +129,6 @@ namespace greyjoy_quicktrippin.Models
 
         public int doesStoreExist(List<Store> list, string itemNumber)
         {
-            bool correctInput = false;
-
                 var input = Console.ReadLine();
                 int parsedOutput;
                 bool intCheck = int.TryParse(input, out parsedOutput);
@@ -143,7 +138,6 @@ namespace greyjoy_quicktrippin.Models
                     if (itemSearch.Count() == 1)
                     {
                         var itemList = itemSearch.ToList();
-                        correctInput = true;
                         return itemList[0].StoreNum;
                     }
                 else return -1;
@@ -154,8 +148,6 @@ namespace greyjoy_quicktrippin.Models
 
         public int doesEmployeeExist(List<Employee> list, string itemNumber)
         {
-            bool correctInput = false;
-
                 var input = Console.ReadLine();
                 int parsedOutput;
                 bool intCheck = int.TryParse(input, out parsedOutput);
@@ -165,7 +157,6 @@ namespace greyjoy_quicktrippin.Models
                     if (itemSearch.Count() == 1)
                     {
                         var itemList = itemSearch.ToList();
-                        correctInput = true;
                         return itemList[0].EmployeeNum;
                     }
                 else return -1;
